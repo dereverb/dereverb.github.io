@@ -1,0 +1,473 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Personalized Dereverberation of Speech</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script type="text/javascript" src="jquery.mlens-1.0.min.js"></script>
+    <script type="text/javascript" src="jquery.js"></script>
+    <style>
+        body {
+            font-family: 'Open-Sans', sans-serif;
+            font-weight: 300;
+            background-color: #fff;
+        }
+
+        .content {
+            width: 1000px;
+            padding: 25px 50px;
+            margin: 25px auto;
+            background-color: white;
+            box-shadow: 0px 0px 10px #999;
+            border-radius: 15px;
+        }
+        .content2 {
+            width: 900px;
+            padding: 25px 25px;
+            margin: 25px auto;
+            background-color: white;
+            /* box-shadow: 0px 0px 10px #999;
+            border-radius: 15px; */
+        }
+
+        .contentblock {
+            width: 950px;
+            margin: 0 auto;
+            padding: 0;
+            border-spacing: 25px 0;
+        }
+
+        .contentblock td {
+            background-color: #fff;
+            padding: 25px 50px;
+            vertical-align: top;
+            box-shadow: 0px 0px 10px #999;
+            border-radius: 15px;
+        }
+
+        a,
+        a:visited {
+            color: #224b8d;
+            font-weight: 300;
+        }
+
+        #authors {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #conference {
+            text-align: center;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        #authors a {
+            margin: 0 10px;
+        }
+
+        table 
+        {
+            table-layout:fixed;
+            width:100%;
+        }
+
+        audio 
+        {
+            width:95%;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 35px;
+            font-weight: 300;
+        }
+
+        h2 {
+            font-size: 30px;
+            font-weight: 300;
+        }
+
+        code {
+            display: block;
+            padding: 10px;
+            margin: 10px 10px;
+        }
+
+        p {
+            line-height: 25px;
+            text-align: justify;
+        }
+
+        p code {
+            display: inline;
+            padding: 0;
+            margin: 0;
+        }
+
+        #teasers {
+            margin: 0 auto;
+        }
+
+        #teasers td {
+            margin: 0 auto;
+            text-align: center;
+            padding: 5px;
+        }
+
+        #teasers img {
+            width: 250px;
+        }
+
+        #results img {
+            width: 133px;
+        }
+
+        #seeintodark {
+            margin: 0 auto;
+        }
+
+        #sift {
+            margin: 0 auto;
+        }
+
+        #sift img {
+            width: 250px;
+        }
+
+        .downloadpaper {
+            padding-left: 20px;
+            float: right;
+            text-align: center;
+        }
+
+        .downloadpaper a {
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #demoframe {
+            border: 0;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 340px;
+        }
+
+        #feedbackform {
+            border: 1px solid #ccc;
+            margin: 0 auto;
+            border-radius: 15px;
+        }
+
+        #eyeglass {
+            height: 530px;
+        }
+
+        #eyeglass #wrapper {
+            position: relative;
+            height: auto;
+            margin: 0 auto;
+            float: left;
+            width: 800px;
+        }
+
+        #mitnews {
+            font-weight: normal;
+            margin-top: 20px;
+            font-size: 14px;
+            width: 220px;
+        }
+
+        #mitnews a {
+            font-weight: normal;
+        }
+
+        .teaser-img {
+            width: 80%;
+						display: block;
+						margin-left: auto;
+						margin-right: auto;
+        }
+        .teaser-gif {
+						display: block;
+						margin-left: auto;
+						margin-right: auto;
+        }
+        .summary-img {
+            width: 100%;
+						display: block;
+						margin-left: auto;
+						margin-right: auto;
+        }
+
+        .video-iframe {
+            width: 1000;
+            height: 800;
+						margin:auto;
+						display:block;
+        }
+
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: center
+      }
+      .image {
+        flex-basis: 40%
+      }
+      .text {
+        font-size: 20px;
+        padding-left: 20px;
+      }
+			.center {
+				margin-left: auto;
+				margin-right: auto;
+			}
+			.boxshadow {
+				border: 1px solid;
+				padding: 10px;
+				box-shadow: 2px 2px 5px #888888;
+			}
+			.spacertr{
+				height: 8px;
+			}
+			.spacertd{
+				width: 40px;
+			}
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="content">
+			<h1>Personalized Dereverberation of Speech</h1>
+            <h2 style="text-align:center;"><i>Supplementary Material</i></h2>
+        <p id="authors">
+            <a href="https://github.com/henryxrl">Ruilin Xu</a>
+            <a href="https://www.linkedin.com/in/krishnanguru">Gurunandan Krishnan</a>
+            <a href="https://www.cs.columbia.edu/~cxz/">Changxi Zheng</a>
+            <a href="https://www.cs.columbia.edu/~nayar/">Shree K. Nayer</a>
+            <br>
+            <!-- <strong>MIT Computer Science and Artificial Intelligence Laboratory</strong> -->
+            Columbia University & Snap Inc.
+            <!-- <br><i>ICASSP 2023</i> -->
+        </p>
+				<!-- <font size="+2">
+					<p style="text-align: center;">
+						<a href="https://arxiv.org/abs/2204.07156" target="_blank">[Paper]</a> &nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="https://github.com/chail/anyres-gan" target="_blank">[Code]</a> &nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="bibtex.txt" target="_blank">[Bibtex]</a>
+					</p>
+				</font>
+				<font size="+1">
+					<p style="text-align: center;">
+						Skip to:  &nbsp;&nbsp;
+						<a href="#abstract">[Abstract]</a> &nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#video">[Supplementary Video]</a> &nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#samples">[Random Samples]</a> &nbsp;&nbsp;&nbsp;&nbsp;
+					</p>
+				</font> -->
+        <!-- <p>
+            <img class='teaser-img' src='img/teaser.gif'></img>
+        </p>
+        <br>
+
+				<p id="abstract"><strong>Abstract: </strong>
+        Generative models operate at fixed resolution, even though
+        natural images come in a variety of sizes.
+        As high-resolution details are downsampled away, and low-resolution images
+        are discarded altogether, precious supervision is lost.
+        We argue that every pixel matters and create datasets with variable-size
+        images, collected at their native resolutions.
+        Taking advantage of this data is challenging; high-resolution processing is
+        costly, and current architectures can only process fixed-resolution data.
+        We introduce continuous-scale training, a process that samples
+        patches at random scales to train a new generator with variable
+        output resolutions.
+        First, conditioning the generator on a target scale allows us to generate
+        higher resolutions images than previously possible, without adding layers to the
+        model.
+        Second, by conditioning on continuous coordinates, we can sample patches that
+        still obey a consistent global layout, allowing for scalable training.
+        Controlled FFHQ experiments show our method takes advantage of the
+        multiresolution training data better than discrete multi-scale
+        approaches, achieving better FID scores and cleaner 
+        high-frequency details.
+        We also train on other natural image domains including churches,
+        mountains, and birds, and demonstrate arbitrary scale synthesis with
+        both coherent global layouts and realistic local details,
+        going beyond 2K resolution in our experiments. 
+				</p>
+        <br clear="all"> -->
+
+        <!-- <h2 style="text-align:center;">Overview</h2>
+
+        <p style="text-align: center;">This offline webpage organizes our speech dereverberation results. We first present a video demonstrating the use of our method in a real-world online conversation between two people from two distinctive environments. Then we show the results of the real-world recordings comparing our method with Wiener, WPE, Demucs, and HiFi-GAN.</p> -->
+
+    </div>
+    <!-- <div class="content" id="summary">
+
+        <h2 style="text-align:center;">Summary</h2>
+
+        <p style="text-align: center;">The typical preprocessing pipeline for unconditional image synthesize resizes all images to the same size, which discards available pixels. We propose a training procedure which can leverage these additional pixels from higher resolution images for image synthesis.
+        </p>
+        <img class='summary-img' src='img/dataset_construction.jpg' style="width:40%;"></img>
+        <br>
+        <hr>
+        <p style="text-align: center;">We treat an image as a continuous 2D surface, where real images and synthesized samples correspond to discretizations of this surface. To deal with images of varied sizes, we sample patches of a fixed size at continuous resolutions and locations.</p>
+        <img class='summary-img' src='img/schematic_v5.jpg' style="width:80%;"></img>
+        <br>
+        <hr>
+        <p style="text-align: center;">Our training pipeline can handle images of different resolutions. We resize the FFHQ dataset to validate design decisions, and additionally collect images from Flickr to build our multi-size datasets.</p>
+        <img class='summary-img' src='img/dataset.jpg'></img>
+        <br>
+        <hr>
+        <p style="text-align: center;">By setting the coordinate grid appropriately, our generator is capable of synthesizing additional details as the resolution increases. 
+        </p>
+        <img class='summary-img' src='img/qualitative.jpg'></img>
+        <br>
+        <hr>
+        <p style="text-align: center;">As we extrapolate on this coordinate grid, the generated textures tend to deteriorate first, dependent on the native training image sizes.
+        </p>
+        <img class='summary-img' src='img/extrapolation.jpg'></img>
+        <br>
+        <hr>
+        <p style="text-align: center;">We can modify our approach to synthesize on a cylindrical image plane, which naturally creates 360 degree panoramas.
+				<br>Click <a href="http://latent-composition.csail.mit.edu/other_projects/anyres_gan/pano010-2.mp4">here</a> to view in video form.</p>
+				<a href="http://latent-composition.csail.mit.edu/other_projects/anyres_gan/pano010-2.mp4"><img class='summary-img' src='img/pano010-2.gif'></img></a>
+				<br>
+        <img class='summary-img' src='img/pano010.png'></img>
+			</div> -->
+      <div class="content" id="video">
+        <h2 style="text-align:center;">Supplementary Video</h2>
+				<!-- <p style="text-align: center;">Click <a href="http://latent-composition.csail.mit.edu/other_projects/anyres_gan/supplementary_video_v4_1600_noaudio.mp4">here</a> to view our supplementary video!</p> -->
+                <p style="text-align: center;">Here we demonstrate a video of an online conversation between two people from two different environments. <br>The male on the left resides in a conference room while the female on the right stays in an large lecture hall. </p>
+				<center>
+					<iframe width="900" height="620" src="https://www.youtube.com/embed/0l11u2HzQrQ?rel=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				</center>
+                <p></p>
+      </div>
+
+			<div class="content" id="samples">
+        <h2 style="text-align:center;">Random Samples</h2>
+				<p style="text-align: center;">Here we show the comparison results of speech dereverberation on real recordings. <tt>Wiener</tt> has little effect on dereverberation and creates strong extra artifacts. While <tt>WPE</tt> produces less artifacts, its dereverberation effect is  minimal. <tt>Demucs</tt> fails to generate clear results since it requires a much larger amount of reverberant data to train. We also show the fine-tuned results on our real recording dataset based on Demucs publically released pretrained weights, denoted as <tt>Demucs (pretrained)</tt>. <tt>HiFi-GAN</tt> outputs inadequate processed outcomes in terms of both dereverberation and clarity of speech. In addition, we include its fine-tuned results based on its released pretrained weight, denoted as <tt>Hifi-GAN (pretrained)</tt>. In contrast, <tt>Ours</tt> processes speech signals in a way that sounds the closest to the clean signals which is recorded by a lavalier microphone on the user. </p>
+				<div class="content2" id="table">
+                <table style="text-align: center;" class="center">
+                    <colgroup>
+                        <col span="1" style="width: 10%;">
+                        <col span="1" style="width: 20%;">
+                        <col span="1" style="width: 20%;">
+                        <col span="1" style="width: 20%;">
+                        <col span="1" style="width: 20%;">
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <th nowrap width="160">Methods</th>
+                        <th>Male 1</th>
+                        <th>Female 1</th>
+                        <th>Male 2</th>
+                        <th>Female 2</th>
+                    </tr>
+                    <tr>
+                        <td nowrap width="160"><tt><i>Recorded</i></tt></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/recorded_Charlie_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/recorded_Sarah_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/recorded_Charlie_02.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/recorded_Sarah_02.wav"></audio></td>
+                    </tr>
+                    <tr>
+                        <td nowrap width="160"><tt>Wiener</tt></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/wiener_Charlie_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/wiener_Sarah_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/wiener_Charlie_02.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/wiener_Sarah_02.wav"></audio></td>
+                    </tr>
+                    <tr>
+                        <td nowrap width="160"><tt>WPE</tt></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/wpe_Charlie_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/wpe_Sarah_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/wpe_Charlie_02.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/wpe_Sarah_02.wav"></audio></td>
+                    </tr>
+                    <tr>
+                        <td nowrap width="160"><tt>Demucs</tt></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/demucs_Charlie_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/demucs_Sarah_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/demucs_Charlie_02.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/demucs_Sarah_02.wav"></audio></td>
+                    </tr>
+                    <tr>
+                        <td nowrap width="160"><tt>Demucs<br>(pretrained)</tt></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/demucs_pretrained_Charlie_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/demucs_pretrained_Sarah_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/demucs_pretrained_Charlie_02.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/demucs_pretrained_Sarah_02.wav"></audio></td>
+                    </tr>
+                    <tr>
+                        <td nowrap width="160"><tt>HiFi-GAN</tt></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/hifigan_Charlie_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/hifigan_Sarah_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/hifigan_Charlie_02.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/hifigan_Sarah_02.wav"></audio></td>
+                    </tr>
+                    <tr>
+                        <td nowrap width="160"><tt>HiFi-GAN<br>(pretrained)</tt></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/hifigan_pretrained_Charlie_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/hifigan_pretrained_Sarah_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/hifigan_pretrained_Charlie_02.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/hifigan_pretrained_Sarah_02.wav"></audio></td>
+                    </tr>
+                    <tr>
+                        <td nowrap width="160"><tt>Adobe<br>Audition</tt></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/audition_Charlie_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/audition_Sarah_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/audition_Charlie_02.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/audition_Sarah_02.wav"></audio></td>
+                    </tr>
+                    <tr>
+                        <td nowrap width="160"><tt><b>Ours</b></tt></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/ours_Charlie_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/ours_Sarah_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/audition_Charlie_02.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/ours_Sarah_02.wav"></audio></td>
+                    </tr>
+                    <tr>
+                        <td nowrap width="160"><tt><i>Clean</i></tt></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/clean_Charlie_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/clean_Sarah_01.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/clean_Charlie_02.wav"></audio></td>
+                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/clean_Sarah_02.wav"></audio></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+				<!-- <br> -->
+        <!-- <hr> -->
+    </div>      
+    <!-- <div class="content" id="references">
+
+        <h2>Reference</h2>
+
+				<p>L Chai, M Gharbi, E Shechtman, P Isola, R Zhang. Any-resolution training for high-resolution image synthesis. arXiv 2022.</p>
+
+        <code>
+			@article{chai2021anyresolution,<br>
+				&nbsp;&nbsp;title={Any-resolution training for high-resolution image synthesis.},<br>
+				&nbsp;&nbsp;author={Chai, Lucy and Gharbi, Michael and Shechtman, Eli and Isola, Phillip and Zhang, Richard},<br>
+				&nbsp;&nbsp;booktitle={arXiv preprint arXiv:2204.07156},<br>
+				&nbsp;&nbsp;year={2022}<br>
+			 }
+				</code>
+    </div>       -->
+    <!-- <div class="content" id="acknowledgements">
+          <p><strong>Acknowledgements</strong>:
+          We thank Assaf Shocher for feedback and Taesung Park for dataset collection advice. LC is supported by the NSF Graduate Research Fellowship under Grant No. 1745302 and Adobe Research Fellowship. This work was started while LC was an intern at Adobe Research and was supported in part by an Adobe gift. 
+					 Recycling a familiar <a href="https://chail.github.io/latent-composition/">template</a> ;).
+    </div> -->
+</body>
+
+</html>
