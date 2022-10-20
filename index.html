@@ -5,8 +5,10 @@
     <title>Personalized Dereverberation of Speech</title>
 
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <script type="text/javascript" src="jquery.mlens-1.0.min.js"></script>
-    <script type="text/javascript" src="jquery.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- <script type="text/javascript" src="jquery.mlens-1.0.min.js"></script>
+    <script type="text/javascript" src="jquery.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <style>
         body {
             font-family: 'Open-Sans', sans-serif;
@@ -238,6 +240,22 @@
 			}
 
     </style>
+    <script>
+        function playaudio(audioID, playerID) {
+            // document.getElementById('a1').play();
+            if ($('#'+audioID).prop("paused") == true) {
+                $('#'+audioID).trigger("play");
+            } else {
+                $('#'+audioID).trigger("pause");
+            }
+            
+            $("#"+playerID+" span").html(
+            $("#"+playerID+" span").html() == 
+            '<i class="fa fa-pause" aria-hidden="true"></i>' ? 
+            '<i class="fa fa-play" aria-hidden="true"></i>' : 
+            '<i class="fa fa-pause" aria-hidden="true"></i>');
+        }
+    </script>
 
 </head>
 
@@ -356,101 +374,382 @@
       </div>
 
 			<div class="content" id="samples">
-        <h2 style="text-align:center;">Random Samples</h2>
-				<p style="text-align: center;">Here we show the comparison results of speech dereverberation on real recordings. <tt>Wiener</tt> has little effect on dereverberation and creates strong extra artifacts. While <tt>WPE</tt> produces less artifacts, its dereverberation effect is  minimal. <tt>Demucs</tt> fails to generate clear results since it requires a much larger amount of reverberant data to train. We also show the fine-tuned results on our real recording dataset based on Demucs publically released pretrained weights, denoted as <tt>Demucs (pretrained)</tt>. <tt>HiFi-GAN</tt> outputs inadequate processed outcomes in terms of both dereverberation and clarity of speech. In addition, we include its fine-tuned results based on its released pretrained weight, denoted as <tt>Hifi-GAN (pretrained)</tt>. Finally, we process the recorded speech by Adobe Audition. The default setting (50% dereverberation) and the max setting (100%) are individually applied, demonstrated as <tt>Audition (50%)</tt> and <tt>Audition (100%)</tt>, respectively. In contrast, <tt>Ours</tt> processes speech signals in a way that sounds the closest to the clean signals which is recorded by a lavalier microphone on the user. </p>
+        <h2 style="text-align:center;">Result Samples</h2>
+				<!-- <p style="text-align: center;">Here we show the comparison results of speech dereverberation on real recordings. <tt>Wiener</tt> has little effect on dereverberation and creates strong extra artifacts. While <tt>WPE</tt> produces less artifacts, its dereverberation effect is  minimal. <tt>Demucs</tt> fails to generate clear results since it requires a much larger amount of reverberant data to train. We also show the fine-tuned results on our real recording dataset based on Demucs publically released pretrained weights, denoted as <tt>Demucs (pretrained)</tt>. <tt>HiFi-GAN</tt> outputs inadequate processed outcomes in terms of both dereverberation and clarity of speech. In addition, we include its fine-tuned results based on its released pretrained weight, denoted as <tt>Hifi-GAN (pretrained)</tt>. Finally, we process the recorded speech by Adobe Audition. The default setting (50% dereverberation) and the max setting (100%) are individually applied, demonstrated as <tt>Audition (50%)</tt> and <tt>Audition (100%)</tt>, respectively. In contrast, <tt>Ours</tt> processes speech signals in a way that sounds the closest to the clean signals which is recorded by a lavalier microphone on the user. </p> -->
 				<div class="content2" id="table">
                 <table style="text-align: center;" class="center">
                     <colgroup>
                         <col span="1" style="width: 15%;">
-                        <col span="1" style="width: 20%;">
-                        <col span="1" style="width: 20%;">
-                        <col span="1" style="width: 20%;">
-                        <col span="1" style="width: 20%;">
+                        <col span="1" style="width: 5%;">
+                        <col span="1" style="width: 5%;">
+                        <col span="1" style="width: 8%;">
+                        <col span="1" style="width: 8%;">
+                        <col span="1" style="width: 8%;">
+                        <col span="1" style="width: 8%;">
+                        <col span="1" style="width: 40%;">
                     </colgroup>
                     <tbody>
                     <tr>
-                        <th nowrap width="160">Methods</th>
+                        <th>Methods</th>
+                        <th>Blind</th>
+                        <th>ML</th>
                         <th>Male 1</th>
                         <th>Female 1</th>
                         <th>Male 2</th>
                         <th>Female 2</th>
+                        <th>Comments</th>
                     </tr>
                     <tr>
-                        <td nowrap width="160"><tt><i>Recorded</i></tt></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/recorded_Charlie_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/recorded_Sarah_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/recorded_Charlie_02.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/recorded_Sarah_02.wav"></audio></td>
+                        <td><tt><i>Recorded</i></tt></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>
+                            <audio id="a11"><source src="asset/audio/Charlie/recorded_Charlie_01.wav"></audio>
+                            <button onclick="playaudio('a11', 'p11')" type="submit" id="p11">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a12"><source src="asset/audio/Sarah/recorded_Sarah_01.wav"></audio>
+                            <button onclick="playaudio('a12', 'p12')" type="submit" id="p12">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a13"><source src="asset/audio/Charlie/recorded_Charlie_02.wav"></audio>
+                            <button onclick="playaudio('a13', 'p13')" type="submit" id="p13">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a14"><source src="asset/audio/Sarah/recorded_Sarah_02.wav"></audio>
+                            <button onclick="playaudio('a14', 'p14')" type="submit" id="p14">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <p>Real recordings of speech by a male and a female in different environments.</p>
+                        </td>
                     </tr>
                     <tr>
-                        <td nowrap width="160"><tt>Wiener</tt></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/wiener_Charlie_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/wiener_Sarah_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/wiener_Charlie_02.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/wiener_Sarah_02.wav"></audio></td>
+                        <td><a href="https://en.wikipedia.org/wiki/Wiener_deconvolution"><tt>Wiener</tt></a></td>
+                        <td>&#x2718;</td>
+                        <td>&#x2718;</td>
+                        <td>
+                            <audio id="a21"><source src="asset/audio/Charlie/wiener_Charlie_01.wav"></audio>
+                            <button onclick="playaudio('a21', 'p21')" type="submit" id="p21">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a22"><source src="asset/audio/Sarah/wiener_Sarah_01.wav"></audio>
+                            <button onclick="playaudio('a22', 'p22')" type="submit" id="p22">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a23"><source src="asset/audio/Charlie/wiener_Charlie_02.wav"></audio>
+                            <button onclick="playaudio('a23', 'p23')" type="submit" id="p23">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a24"><source src="asset/audio/Sarah/wiener_Sarah_02.wav"></audio>
+                            <button onclick="playaudio('a24', 'p24')" type="submit" id="p24">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <p><tt>Wiener</tt> has little effect on dereverberation and creates strong artifacts.</p>
+                        </td>
                     </tr>
                     <tr>
-                        <td nowrap width="160"><tt>WPE</tt></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/wpe_Charlie_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/wpe_Sarah_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/wpe_Charlie_02.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/wpe_Sarah_02.wav"></audio></td>
+                        <td><a href="https://github.com/fgnt/nara_wpe"><tt>WPE</tt></a></td>
+                        <td>&#10004;</td>
+                        <td>&#x2718;</td>
+                        <td>
+                            <audio id="a31"><source src="asset/audio/Charlie/wpe_Charlie_01.wav"></audio>
+                            <button onclick="playaudio('a31', 'p31')" type="submit" id="p31">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a32"><source src="asset/audio/Sarah/wpe_Sarah_01.wav"></audio>
+                            <button onclick="playaudio('a32', 'p32')" type="submit" id="p32">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a33"><source src="asset/audio/Charlie/wpe_Charlie_02.wav"></audio>
+                            <button onclick="playaudio('a33', 'p33')" type="submit" id="p33">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a34"><source src="asset/audio/Sarah/wpe_Sarah_02.wav"></audio>
+                            <button onclick="playaudio('a34', 'p34')" type="submit" id="p34">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <p>While <tt>WPE</tt> produces less artifacts, its dereverberation effect is minimal.</p>
+                        </td>
                     </tr>
                     <tr>
-                        <td nowrap width="160"><tt>Demucs</tt></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/demucs_Charlie_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/demucs_Sarah_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/demucs_Charlie_02.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/demucs_Sarah_02.wav"></audio></td>
+                        <td><a href="https://arxiv.org/abs/2006.12847"><tt>Demucs</tt></a></td>
+                        <td>&#10004;</td>
+                        <td>&#10004;</td>
+                        <td>
+                            <audio id="a41"><source src="asset/audio/Charlie/demucs_Charlie_01.wav"></audio>
+                            <button onclick="playaudio('a41', 'p41')" type="submit" id="p41">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a42"><source src="asset/audio/Sarah/demucs_Sarah_01.wav"></audio>
+                            <button onclick="playaudio('a42', 'p42')" type="submit" id="p42">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a43"><source src="asset/audio/Charlie/demucs_Charlie_02.wav"></audio>
+                            <button onclick="playaudio('a43', 'p43')" type="submit" id="p43">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a44"><source src="asset/audio/Sarah/demucs_Sarah_02.wav"></audio>
+                            <button onclick="playaudio('a44', 'p44')" type="submit" id="p44">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <p><tt>Demucs</tt> fails to generate clear results since it requires a much larger amount of reverberant data to train.</p>
+                        </td>
                     </tr>
                     <tr>
-                        <td nowrap width="160"><tt>Demucs<br>(pretrained)</tt></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/demucs_pretrained_Charlie_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/demucs_pretrained_Sarah_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/demucs_pretrained_Charlie_02.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/demucs_pretrained_Sarah_02.wav"></audio></td>
+                        <td><a href="https://arxiv.org/abs/2006.12847"><tt>Demucs<br>(pretrained)</tt></a></td>
+                        <td>&#10004;</td>
+                        <td>&#10004;</td>
+                        <td>
+                            <audio id="a51"><source src="asset/audio/Charlie/demucs_pretrained_Charlie_01.wav"></audio>
+                            <button onclick="playaudio('a51', 'p51')" type="submit" id="p51">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a52"><source src="asset/audio/Sarah/demucs_pretrained_Sarah_01.wav"></audio>
+                            <button onclick="playaudio('a52', 'p52')" type="submit" id="p52">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a53"><source src="asset/audio/Charlie/demucs_pretrained_Charlie_02.wav"></audio>
+                            <button onclick="playaudio('a53', 'p53')" type="submit" id="p53">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a54"><source src="asset/audio/Sarah/demucs_pretrained_Sarah_02.wav"></audio>
+                            <button onclick="playaudio('a54', 'p54')" type="submit" id="p54">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <p>We use the pre-trained weights published by <tt>Demucs</tt> directly on our real recordings.</p>
+                        </td>
                     </tr>
                     <tr>
-                        <td nowrap width="160"><tt>HiFi-GAN</tt></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/hifigan_Charlie_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/hifigan_Sarah_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/hifigan_Charlie_02.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/hifigan_Sarah_02.wav"></audio></td>
+                        <td><a href="https://arxiv.org/abs/2006.05694"><tt>HiFi-GAN</tt></a></td>
+                        <td>&#10004;</td>
+                        <td>&#10004;</td>
+                        <td>
+                            <audio id="a61"><source src="asset/audio/Charlie/hifigan_Charlie_01.wav"></audio>
+                            <button onclick="playaudio('a61', 'p61')" type="submit" id="p61">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a62"><source src="asset/audio/Sarah/hifigan_Sarah_01.wav"></audio>
+                            <button onclick="playaudio('a62', 'p62')" type="submit" id="p62">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a63"><source src="asset/audio/Charlie/hifigan_Charlie_02.wav"></audio>
+                            <button onclick="playaudio('a63', 'p63')" type="submit" id="p63">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a64"><source src="asset/audio/Sarah/hifigan_Sarah_02.wav"></audio>
+                            <button onclick="playaudio('a64', 'p64')" type="submit" id="p64">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <p><tt>HiFi-GAN</tt> outputs inadequate processed outcomes in terms of both dereverberation and clarity of speech.</p>
+                        </td>
                     </tr>
                     <tr>
-                        <td nowrap width="160"><tt>HiFi-GAN<br>(pretrained)</tt></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/hifigan_pretrained_Charlie_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/hifigan_pretrained_Sarah_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/hifigan_pretrained_Charlie_02.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/hifigan_pretrained_Sarah_02.wav"></audio></td>
+                        <td><a href="https://arxiv.org/abs/2006.05694"><tt>HiFi-GAN<br>(pretrained)</tt></a></td>
+                        <td>&#10004;</td>
+                        <td>&#10004;</td>
+                        <td>
+                            <audio id="a71"><source src="asset/audio/Charlie/hifigan_pretrained_Charlie_01.wav"></audio>
+                            <button onclick="playaudio('a71', 'p71')" type="submit" id="p71">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a72"><source src="asset/audio/Sarah/hifigan_pretrained_Sarah_01.wav"></audio>
+                            <button onclick="playaudio('a72', 'p72')" type="submit" id="p72">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a73"><source src="asset/audio/Charlie/hifigan_pretrained_Charlie_02.wav"></audio>
+                            <button onclick="playaudio('a73', 'p73')" type="submit" id="p73">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a74"><source src="asset/audio/Sarah/hifigan_pretrained_Sarah_02.wav"></audio>
+                            <button onclick="playaudio('a74', 'p74')" type="submit" id="p74">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <p>We use the published pre-trained weights by <tt>HiFi-GAN</tt> directly on our real recordings.</p>
+                        </td>
                     </tr>
                     <tr>
-                        <td nowrap width="160"><tt>Audition<br>(50% Dereverb)</tt></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/audition_50_Charlie_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/audition_50_Sarah_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/audition_50_Charlie_02.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/audition_50_Sarah_02.wav"></audio></td>
+                        <td><a href="https://www.adobe.com/products/audition.html"><tt>Audition<br>(50% Dereverb)</tt></a></td>
+                        <td>&#10004;</td>
+                        <td>&#10004;</td>
+                        <td>
+                            <audio id="a81"><source src="asset/audio/Charlie/audition_50_Charlie_01.wav"></audio>
+                            <button onclick="playaudio('a81', 'p81')" type="submit" id="p81">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a82"><source src="asset/audio/Sarah/audition_50_Sarah_01.wav"></audio>
+                            <button onclick="playaudio('a82', 'p82')" type="submit" id="p82">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a83"><source src="asset/audio/Charlie/audition_50_Charlie_02.wav"></audio>
+                            <button onclick="playaudio('a83', 'p83')" type="submit" id="p83">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a84"><source src="asset/audio/Sarah/audition_50_Sarah_02.wav"></audio>
+                            <button onclick="playaudio('a84', 'p84')" type="submit" id="p84">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <p>We use <tt>Adobe Audition</tt> to dereverberate our recordings. Dereverberation amount is set to 50%.</p>
+                        </td>
                     </tr>
                     <tr>
-                        <td nowrap width="160"><tt>Audition<br>(100% Dereverb)</tt></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/audition_100_Charlie_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/audition_100_Sarah_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/audition_100_Charlie_02.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/audition_100_Sarah_02.wav"></audio></td>
+                        <td><a href="https://www.adobe.com/products/audition.html"><tt>Audition<br>(100% Dereverb)</tt></a></td>
+                        <td>&#10004;</td>
+                        <td>&#10004;</td>
+                        <td>
+                            <audio id="a91"><source src="asset/audio/Charlie/audition_100_Charlie_01.wav"></audio>
+                            <button onclick="playaudio('a91', 'p91')" type="submit" id="p91">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a92"><source src="asset/audio/Sarah/audition_100_Sarah_01.wav"></audio>
+                            <button onclick="playaudio('a92', 'p92')" type="submit" id="p92">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a93"><source src="asset/audio/Charlie/audition_100_Charlie_02.wav"></audio>
+                            <button onclick="playaudio('a93', 'p93')" type="submit" id="p93">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a94"><source src="asset/audio/Sarah/audition_100_Sarah_02.wav"></audio>
+                            <button onclick="playaudio('a94', 'p94')" type="submit" id="p94">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <p>We use <tt>Adobe Audition</tt> to dereverberate our recordings. Dereverberation amount is set to 100%.</p>
+                        </td>
                     </tr>
                     <tr>
-                        <td nowrap width="160"><tt><b>Ours</b></tt></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/ours_Charlie_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/ours_Sarah_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/ours_Charlie_02.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/ours_Sarah_02.wav"></audio></td>
+                        <td><tt><b>Ours</b></tt></td>
+                        <td>&#x2718;</td>
+                        <td>&#10004;</td>
+                        <td>
+                            <audio id="a101"><source src="asset/audio/Charlie/ours_Charlie_01.wav"></audio>
+                            <button onclick="playaudio('a101', 'p101')" type="submit" id="p101">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a102"><source src="asset/audio/Sarah/ours_Sarah_01.wav"></audio>
+                            <button onclick="playaudio('a102', 'p102')" type="submit" id="p102">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a103"><source src="asset/audio/Charlie/ours_Charlie_02.wav"></audio>
+                            <button onclick="playaudio('a103', 'p103')" type="submit" id="p103">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a104"><source src="asset/audio/Sarah/ours_Sarah_02.wav"></audio>
+                            <button onclick="playaudio('a104', 'p104')" type="submit" id="p104">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <p><tt>Ours</tt> processes speech signals in a way that sounds the closest to the clean signals.</p>
+                        </td>
                     </tr>
                     <tr>
-                        <td nowrap width="160"><tt><i>Clean</i></tt></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/clean_Charlie_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/clean_Sarah_01.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Charlie/clean_Charlie_02.wav"></audio></td>
-                        <td><audio controls="" preload="none"><source src="asset/audio/Sarah/clean_Sarah_02.wav"></audio></td>
+                        <td><tt><i>Clean</i></tt></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>
+                            <audio id="a111"><source src="asset/audio/Charlie/clean_Charlie_01.wav"></audio>
+                            <button onclick="playaudio('a111', 'p111')" type="submit" id="p111">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a112"><source src="asset/audio/Sarah/clean_Sarah_01.wav"></audio>
+                            <button onclick="playaudio('a112', 'p112')" type="submit" id="p112">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a113"><source src="asset/audio/Charlie/clean_Charlie_02.wav"></audio>
+                            <button onclick="playaudio('a113', 'p113')" type="submit" id="p113">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <audio id="a114"><source src="asset/audio/Sarah/clean_Sarah_02.wav"></audio>
+                            <button onclick="playaudio('a114', 'p114')" type="submit" id="p114">
+                                <span><i class="fa fa-play" aria-hidden="true"></i></span>
+                            </button>
+                        </td>
+                        <td>
+                            <p>Clean signals of speech, recorded by a lavalier microphone worn by the user.</p>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
