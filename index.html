@@ -365,12 +365,12 @@
         <img class='summary-img' src='img/pano010.png'></img>
 			</div> -->
     <div class="content" id="video">
-        <h2 style="text-align:center;">Supplementary Video</h2>
+        <h2 style="text-align:center;">Video Demonstration</h2>
         <!-- <p style="text-align: center;">Click <a href="http://latent-composition.csail.mit.edu/other_projects/anyres_gan/supplementary_video_v4_1600_noaudio.mp4">here</a> to view our supplementary video!</p> -->
-        <p style="text-align: center;">Here we demonstrate the process of the personalization step introduced in the
-            paper. Then we show a video of an online conversation between a male and a female from two different
-            environments. <br>The male on the left resides in a conference room while the female on the right stays in
-            an small study room. </p>
+        <p style="text-align: justify; text-align-last: center;">
+            In this video we demonstrate the one-time personalization process introduced in the
+            paper. We measure the representative room impulse response (<tt>rRIR</tt>) and then capture a few minutes of speech. Following personalization, we show an online conversation between a male and a female in two different
+            environments. Our processing achieves both dereverberation and denoising resulting in better speech clarity. </p>
         <center>
             <iframe width="900" height="620" src="https://www.youtube.com/embed/dk-3kI3Qa6M?rel=0"
                 title="YouTube video player" frameborder="0"
@@ -486,7 +486,7 @@
                             </button>
                         </td>
                         <td>
-                            <p><tt>Wiener</tt> has little effect on dereverberation and creates strong artifacts.</p>
+                            <p><tt>Wiener</tt> struggles at dereverberation and creates strong artifacts due to imprecise RIR.</p>
                         </td>
                     </tr>
                     <tr>
@@ -526,7 +526,7 @@
                             </button>
                         </td>
                         <td>
-                            <p>While <tt>WPE</tt> produces less artifacts, its dereverberation effect is minimal.</p>
+                            <p><tt>WPE</tt> produces fewer artifacts, but achieves minimal dereverberation.</p>
                         </td>
                     </tr>
                     <tr>
@@ -566,8 +566,7 @@
                             </button>
                         </td>
                         <td>
-                            <p><tt>Demucs</tt> fails to generate clear results since it requires a much larger amount of
-                                reverberant data to train.</p>
+                            <p><tt>Demucs</tt> is designed primarily for audio denoising. When trained with reverberation data, it fails to handle complex RIRs.</p>
                         </td>
                     </tr>
                     <tr>
@@ -607,8 +606,7 @@
                             </button>
                         </td>
                         <td>
-                            <p>We use the pre-trained weights published by <tt>Demucs</tt> directly on our real
-                                recordings.</p>
+                            <p>Pre-trained <tt>Demucs</tt> results in denoising but minimal dereverberation.</p>
                         </td>
                     </tr>
                     <tr>
@@ -648,7 +646,7 @@
                             </button>
                         </td>
                         <td>
-                            <p><tt>HiFi-GAN</tt> outputs inadequate processed outcomes in terms of both dereverberation
+                            <p><tt>HiFi-GAN</tt>, trained on our data, produces inadequate dereverberation
                                 and clarity of speech.</p>
                         </td>
                     </tr>
@@ -689,11 +687,10 @@
                             </button>
                         </td>
                         <td>
-                            <p>We use the published pre-trained weights by <tt>HiFi-GAN</tt> directly on our real
-                                recordings.</p>
+                            <p>Pre-trained <tt>HiFi-GAN</tt> produces inadequate dereverberation and clarity of speech as well.</p>
                         </td>
                     </tr>
-                    <tr>
+                    <!--tr>
                         <td><a href="https://www.adobe.com/products/audition.html"><tt>Audition<br>(50%
                                     Dereverb)</tt></a></td>
                         <td>&#10004;</td>
@@ -734,7 +731,7 @@
                             <p>We use <tt>Adobe Audition</tt> to dereverberate our recordings. Dereverberation amount is
                                 set to 50%.</p>
                         </td>
-                    </tr>
+                    </tr-->
                     <tr>
                         <td><a href="https://www.adobe.com/products/audition.html"><tt>Audition<br>(100%
                                     Dereverb)</tt></a></td>
@@ -773,8 +770,7 @@
                             </button>
                         </td>
                         <td>
-                            <p>We use <tt>Adobe Audition</tt> to dereverberate our recordings. Dereverberation amount is
-                                set to 100%.</p>
+                            <p><tt>Adobe Audition</tt> produces achieves some dereverberation but distorts the audio.</p>
                         </td>
                     </tr>
                     <tr>
@@ -814,8 +810,7 @@
                             </button>
                         </td>
                         <td>
-                            <p><tt>Ours</tt> processes speech signals in a way that sounds the closest to the clean
-                                signals.</p>
+                            <p><tt>Our</tt> method produces results almost indistinguishable from <tt>clean</tt> recordings.</p>
                         </td>
                     </tr>
                     <tr>
@@ -855,7 +850,7 @@
                             </button>
                         </td>
                         <td>
-                            <p>Clean signals of speech, recorded by a lavalier microphone worn by the user.</p>
+                            <p>Reference speech recorded using a lavalier microphone worn by the user.</p>
                         </td>
                     </tr>
                 </tbody>
